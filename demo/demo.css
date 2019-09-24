@@ -32,3 +32,12 @@ body {
 .falsey-node {
     stroke: #ff554b;
 }
+
+#node-box {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 100px;
+    left: auto;
+    right: auto;
+}

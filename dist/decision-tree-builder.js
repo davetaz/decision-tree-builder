@@ -89,7 +89,7 @@
 				return new Promise(function (resolve, reject) {
 
 					// if no more children, we have a result
-					if (!node.children) resolve({ result: node.data.classification, path: decisionPath });
+					if (!node.children) resolve({ result: node.data.classification, path: decisionPath , target: target.label, node: node});
 
 					// decision node property
 					var rules = node.data.rules;
@@ -569,16 +569,16 @@
 
 			// Enter any new nodes at the parent's previous position.
 			var nodeEnter = node.enter().append('g').attr('class', 'node').attr("id", function (d) {
-				return "node-" + d.id;
-			}).attr("transform", function (d) {
-				if (source.x0) return "translate(" + source.x0 + "," + source.y0 + ")";
-			}).on('click', _click);
+					return "node-" + d.id;
+				}).attr("transform", function (d) {
+					if (source.x0) return "translate(" + source.x0 + "," + source.y0 + ")";
+				}).on('click', _click);
 
-			// RECT NODES
+				// RECT NODES
 
-			var nodeRects = node.selectAll("rect.node-rect");
+				var nodeRects = node.selectAll("rect.node-rect");
 
-			// add any new rect nodes
+				// add any new rect nodes
 			nodeEnter.append("rect").attr("width", nodeWidth / 2).attr("class", function (d) {
 
 				// decision
@@ -587,12 +587,12 @@
 				}
 				// truthy child
 				else if (d.parent && d.parent.children[1].data.name == d.data.name) {
-						return "node-rect truthy-node";
-					}
-					// falsey child
-					else {
-							return "node-rect falsey-node";
-						}
+					return "node-rect truthy-node";
+				}
+				// falsey child
+				else {
+					return "node-rect falsey-node";
+				}
 			}).attr("height", function (d) {
 				return !d._children && !d.children ? nodeHeight / 3 : nodeHeight / 2;
 			}).attr("transform", function (d) {
@@ -602,7 +602,6 @@
 			}).attr("stroke", "black").attr("stroke-width", 2).attr('cursor', 'pointer').style("fill", function (d) {
 				return !d._children && !d.children ? "#CCC" : "#FFF";
 			});
-
 			// we also need to trigger an update for the other nodes because the addition of
 			// new nodes means there's a leaf that needs to update to a decision node
 			nodeRects.attr("height", function (d) {
@@ -618,16 +617,15 @@
 				}
 				// truthy child
 				else if (d.parent && d.parent.children[1].data.name == d.data.name) {
-						return "node-rect truthy-node";
-					}
-					// falsey child
-					else {
-							return "node-rect falsey-node";
-						}
+					return "node-rect truthy-node";
+				}
+				// falsey child
+				else {
+					return "node-rect falsey-node";
+				}
 			}).style("fill", function (d) {
 				return !d._children && !d.children ? "#CCC" : "#FFF";
 			});
-
 			// edit node names if exist and no new nodes
 			var rectLabel = node.selectAll("text.node-name");
 			if (!rectLabel.empty() && rectLabel.size() == this.nodes.length) {
@@ -635,11 +633,24 @@
 					return d.data.name;
 				});
 			} else {
-				// add new node names
-				nodeEnter.append('text').attr("dy", ".35em").attr("class", "node-name").attr("text-anchor", "middle").text(function (d) {
+				nodeEnter.append('text').attr("dy", "-.35em").attr("class", "node-name").attr("text-anchor", "middle").text(function (d) {
 					return d.data.name;
 				});
+				nodeEnter.append('text').attr("dx","-2em").attr("dy", "1.35em").attr("class", "node-name node-data-sf").attr("text-anchor", "middle").text(function (d) {
+					if (typeof(d.data.SF) != "undefined") {return "SF:" + d.data.SF;}
+				});
+				nodeEnter.append('text').attr("dx","2em").attr("dy", "1.35em").attr("class", "node-name node-data-ny").attr("text-anchor", "middle").text(function (d) {
+					if (typeof(d.data.NY) != "undefined") {return "NY: " + d.data.NY;}
+				});
 			}
+			var decisionLabelNY = node.selectAll("text.node-data-ny");
+			decisionLabelNY.text(function(d) {
+				if (typeof(d.data.NY) != "undefined") {return "NY: " + d.data.NY;}
+			});
+			var decisionLabelSF = node.selectAll("text.node-data-sf");
+			decisionLabelSF.text(function(d) {
+				if (typeof(d.data.SF) != "undefined") {return "SF:" + d.data.SF;}
+			});
 
 			// add new link labels
 			nodeEnter.append('text').attr("dy", ".65em").attr("class", "link-label").attr("x", function (d) {

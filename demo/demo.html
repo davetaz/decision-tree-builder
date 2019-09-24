@@ -22,18 +22,22 @@
 		<input type="radio" name="nodeAction" class="nodeAction" value="updateDecisionNodeData" />
 		updateDecisionNodeData (on click)
 	</label>
-
 	<button onclick="serialise();">serialiseTreeToJSON</button>
 	<button onclick="myBuilder.fitBounds(0.70, 500);">fitBounds</button>
 	<button onclick="myBuilder.adjustBounds({ x: 100, y: -100, duration: 500 });">adjustBounds</button>
 	<button onclick="queryTree();">queryTree</button>
 	<button onclick="myBuilder.destroy();">destroy</button>
-
-
 </div>
 <div id="tree-panel"></div>
+<script src="../data/cards.js"></script>
 <script src="../data/tree-data-example.js"></script>
 <script src="../dist/decision-tree-builder.js"></script>
 <script src="demo.js"></script>
+<div id="node-box">
+		Category: <select id="property"></select><br/>
+		Boundary: <input type="text" id="boundary" value="4"></input><br/>
+		Direction: <select id="direction"><option id="lt" value="lt">lt</option><option id="gt" value="gt">gt</option></select>
+		<button id="addNode" onclick="addRootNode();">Add node</button>
+</div>
 </body>
 </html>
