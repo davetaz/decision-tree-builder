@@ -60,11 +60,15 @@ function addNodes(node){
 		//false
 		{
 			"name": "False",
+			"SF": 0,
+			"NY": 0,
 			"classification": "False"
 		},
 		//true
 		{
 			"name": "True",
+			"SF": 0,
+			"NY": 0,
 			"classification": "True"
 		}
 	];
@@ -87,6 +91,7 @@ function addNodes(node){
 
 function pruneNode(node){
 	myBuilder.pruneNode(node);
+
 }
 
 function addRootNode() {
@@ -137,32 +142,29 @@ function serialise(){
 }
 
 function updateDecisionNodeData(node){
-
-	var newData = {
-		"name": "newData #1",
-		"rules": [
-			{
-				"property": "isFoo",
-				"operator": "equals",
-				"value": true
-			}
-		],
-		"children": [
-			{
-				"name": "Falsey child",
-				"classification": "FALSE"
-			},
-			{
-				"name": "Truthy child",
-				"classification": "TRUE"
-			}
-		]
-	};
-
+	var children = [
+		//false
+		{
+			"name": "False",
+			"SF": 0,
+			"NY": 0,
+			"classification": "False"
+		},
+		//true
+		{
+			"name": "True",
+			"SF": 0,
+			"NY": 0,
+			"classification": "True"
+		}
+	];
+	var newData = node.data;
+	newData.children = children;
 	myBuilder.updateDecisionNodeData(node, newData);
 }
 
 function queryTree(){
+	var timestamp = Date.now();
 
 	var data = [
 	{
@@ -214,6 +216,11 @@ function queryTree(){
 		myBuilder.queryDecisionTree(object).then((result) => {
 			node = result.node;
 			data = node.data;
+			if (data.timestamp != timestamp) {
+				data.timestamp = timestamp;
+				data.SF = 0;
+				data.NY = 0;
+			}
 			data[result.target] = data[result.target] + 1;
 			myBuilder.updateNodeData(node,data);
 		});

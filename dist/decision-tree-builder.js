@@ -319,7 +319,29 @@
 				delete node.children;
 				delete node.data.children;
 				delete node.data.rules;
+				node.data.SF = 0;
+				node.data.NY = 0;
 				this.update(node);
+				parent = node.parent;
+				var children = [
+					//false
+					{
+						"name": "False",
+						"SF": 0,
+						"NY": 0,
+						"classification": "False"
+					},
+					//true
+					{
+						"name": "True",
+						"SF": 0,
+						"NY": 0,
+						"classification": "True"
+					}
+				];
+				var newData = parent.data;
+				newData.children = children;
+				myBuilder.updateDecisionNodeData(parent, newData);
 				_broadcastNode(node);
 			}
 		};
@@ -391,6 +413,9 @@
 
 			// parent, only update name, property
 			node.data.name = newData.name;
+			delete node.data.classification;
+			delete node.data.SF;
+			delete node.data.NY;
 
 			if (!node.data.children) node.data.children = [];
 
@@ -399,6 +424,7 @@
 
 			// FALSEY child
 			node.data.children[0].name = newData.children[0].name;
+			node.children[0].data.name = newData.children[0].name;
 			// decision
 			if (node.data.children[0].hasOwnProperty('rules')) node.data.children[0].rules = newData.children[0].rules || null;
 			// leaf
@@ -406,12 +432,15 @@
 
 			// TRUTHY child
 			node.data.children[1].name = newData.children[1].name;
+			node.children[1].data.name = newData.children[1].name;
 			// decision
 			if (node.data.children[1].hasOwnProperty('rules')) node.data.children[1].rules = newData.children[1].rules || null;
 			// leaf
 			if (newData.children[1].classification) node.data.children[1].classification = newData.children[1].classification;
-
+		
 			this.update(node);
+			this.update(node.children[0]);
+			this.update(node.children[1]);
 			this.setHighlighted(node, true);
 			_broadcastNode(node);
 		};
@@ -643,6 +672,10 @@
 					if (typeof(d.data.NY) != "undefined") {return "NY: " + d.data.NY;}
 				});
 			}
+			var rectLabel = node.selectAll("text.node-name");
+			rectLabel.text(function (d) {
+				return d.data.name;
+			});
 			var decisionLabelNY = node.selectAll("text.node-data-ny");
 			decisionLabelNY.text(function(d) {
 				if (typeof(d.data.NY) != "undefined") {return "NY: " + d.data.NY;}
