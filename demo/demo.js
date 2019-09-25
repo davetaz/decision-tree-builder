@@ -165,53 +165,6 @@ function updateDecisionNodeData(node){
 
 function queryTree(){
 	var timestamp = Date.now();
-
-	var data = [
-	{
-		"id": 184,
-		"label": "SF",
-		"Bathrooms": 4,
-		"Bedrooms": 4,
-		"Year built": 1900,
-		"Elevation": 75,
-		"Square Footage": 3816,
-		"Price": 2650000,
-		"Price per sqft": 694
-	},
-	{
-		"id": 87,
-		"label": "SF",
-		"Bathrooms": 1,
-		"Bedrooms": 1,
-		"Year built": 1900,
-		"Elevation": 70,
-		"Square Footage": 811,
-		"Price": 725000,
-		"Price per sqft": 894
-	},
-	{
-		"id": 191,
-		"label": "NY",
-		"Bathrooms": 2,
-		"Bedrooms": 2,
-		"Year built": 1973,
-		"Elevation": 10,
-		"Square Footage": 1400,
-		"Price": 1599000,
-		"Price per sqft": 1142
-	},
-	{
-		"id": 123,
-		"label": "NY",
-		"Bathrooms": 1,
-		"Bedrooms": 1,
-		"Year built": 1900,
-		"Elevation": 10,
-		"Square Footage": 1093,
-		"Price": 1195000,
-		"Price per sqft": 1093
-	}];
-
 	$.each(data, function(key, object) {
 		myBuilder.queryDecisionTree(object).then((result) => {
 			node = result.node;
@@ -264,6 +217,12 @@ function populateData() {
           .append($('<option>', { value : key })
           .text(value));
 	});
+}
+
+function expandSection(section) {
+	sectionName = section + "SubSection";
+	console.log(sectionName);
+	$('#'+sectionName).show();
 }
 
 $( document ).ready(function() {

@@ -10,34 +10,47 @@
 </head>
 <body>
 <div id="controls">
-	<label>
-		<input type="radio" name="nodeAction" class="nodeAction" value="addChildNodes" />
-		addChildNodes (on click)
-	</label>
-	<label>
-		<input type="radio" name="nodeAction" class="nodeAction" value="pruneNode" />
-		pruneNode (on click)
-	</label>
-	<label>
-		<input type="radio" name="nodeAction" class="nodeAction" value="updateDecisionNodeData" />
-		updateDecisionNodeData (on click)
-	</label>
-	<button onclick="serialise();">serialiseTreeToJSON</button>
-	<button onclick="myBuilder.fitBounds(0.70, 500);">fitBounds</button>
-	<button onclick="myBuilder.adjustBounds({ x: 100, y: -100, duration: 500 });">adjustBounds</button>
-	<button onclick="queryTree();">queryTree</button>
-	<button onclick="myBuilder.destroy();">destroy</button>
+	<section id="addRootNodeSection">
+		<button onclick="expandSection('addRootNode');">Add new root node</button>
+		<subsection id="addRootNodeSubSection">
+			Category: <select id="property"></select><br/>
+			Boundary: <input type="text" id="boundary" value="4"></input><br/>
+			Direction: <select id="direction"><option id="lt" value="lt">lt</option><option id="gt" value="gt">gt</option></select>
+			<button onclick="addRootNode()">Add new root node</button>
+		</subsection>
+	</section>
+	<section id="addChildNodesSection">
+		<button onclick="expandSection('addChildNodes');">Add new child node</button>
+		<subsection id="addChildNodesSubSection">
+			Category: <select id="property"></select><br/>
+			Boundary: <input type="text" id="boundary" value="4"></input><br/>
+			Direction: <select id="direction"><option id="lt" value="lt">lt</option><option id="gt" value="gt">gt</option></select>
+			<label id="addChildNodesLabel">
+				<input type="radio" name="nodeAction" class="nodeAction" value="addChildNodes" />
+			</label>
+		</subsection>
+	</section>
+	<section id="pruneNodeSection">
+		<button onclick="expandSection('pruneNode');">Remove node</button>
+		<label>
+			<input type="radio" name="nodeAction" class="nodeAction" value="pruneNode" />
+			pruneNode (on click)
+		</label>
+	</section>
+	<section>
+		<button onclick="myBuilder.fitBounds(0.70, 500);">Autofit</button>
+	</section>
+	<section>
+		<button onclick="queryTree();">Run Data</button>
+	</section>
+	<!--<button onclick="serialise();">serialiseTreeToJSON</button>-->
+	<!--<button onclick="myBuilder.adjustBounds({ x: 100, y: -100, duration: 500 });">adjustBounds</button>-->
+	<!--<button onclick="myBuilder.destroy();">destroy</button>-->
 </div>
 <div id="tree-panel"></div>
 <script src="../data/cards.js"></script>
 <script src="../data/tree-data-example.js"></script>
 <script src="../dist/decision-tree-builder.js"></script>
 <script src="demo.js"></script>
-<div id="node-box">
-		Category: <select id="property"></select><br/>
-		Boundary: <input type="text" id="boundary" value="4"></input><br/>
-		Direction: <select id="direction"><option id="lt" value="lt">lt</option><option id="gt" value="gt">gt</option></select>
-		<button id="addNode" onclick="addRootNode();">Add node</button>
-</div>
 </body>
 </html>
