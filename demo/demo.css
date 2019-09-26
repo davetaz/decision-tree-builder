@@ -12,8 +12,26 @@ body {
 #controls {
     position: absolute;
     top: 50px;
-    left: 40px;
+    right: 40px;
     z-index: 1;
+    width: 300px;
+}
+#controls section {
+    display: block;
+    padding-bottom: 6px;
+}
+#controls section subsection {
+    display: none;
+}
+#controls section label{
+    display: none;
+}
+#controls section subsection label{
+    display: none;
+}
+#controls section button {
+    width: 100%;
+    display: button;
 }
 
 /* optional link coloring */
@@ -40,4 +58,12 @@ body {
     top: 100px;
     left: auto;
     right: auto;
+}
+
+#boundary {
+    width: 100px;
+}
+
+#root-boundary {
+    width: 100px;
 }
