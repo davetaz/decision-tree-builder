@@ -59,3 +59,11 @@ body {
     left: auto;
     right: auto;
 }
+
+#boundary {
+    width: 100px;
+}
+
+#root-boundary {
+    width: 100px;
+}

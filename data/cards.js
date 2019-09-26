@@ -7,7 +7,7 @@ var categories = {
   "Price": "Price", 
   "Price per sqft": "Price per sqft" 
 }; 
-var data = [
+var houses = [
 	{
 		"id": 184,
 		"label": "SF",

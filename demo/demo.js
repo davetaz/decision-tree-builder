@@ -44,6 +44,7 @@ var options = {
 };
 
 var myBuilder = new DecisionTreeBuilder(treeData, options);
+queryTree();
 
 function addNodes(node){
 	property = $('#property').val();
@@ -87,18 +88,26 @@ function addNodes(node){
 	};
 
 	myBuilder.updateDecisionNodeData(node, decisionNodeData);
+	hideSubSections();
+	queryTree();
+}
+
+function fitBounds() {
+	hideSubSections();
+	myBuilder.fitBounds(0.70, 500);
 }
 
 function pruneNode(node){
 	myBuilder.pruneNode(node);
+	hideSubSections();
 
 }
 
 function addRootNode() {
 	myBuilder.destroy();
-	property = $('#property').val();
-	value = $('#boundary').val();
-	direction = $('#direction').val();
+	property = $('#root-property').val();
+	value = $('#root-boundary').val();
+	direction = $('#root-direction').val();
 	operator = "greater_than";
 	if (direction == "gt") {
 		name = property + " >= " + value;
@@ -133,6 +142,8 @@ function addRootNode() {
 		]
 	};
 	myBuilder = new DecisionTreeBuilder(treeData, options);
+	hideSubSections();
+	queryTree();
 }
 
 function serialise(){
@@ -164,8 +175,9 @@ function updateDecisionNodeData(node){
 }
 
 function queryTree(){
+	hideSubSections();
 	var timestamp = Date.now();
-	$.each(data, function(key, object) {
+	$.each(houses, function(key, object) {
 		myBuilder.queryDecisionTree(object).then((result) => {
 			node = result.node;
 			data = node.data;
@@ -178,9 +190,6 @@ function queryTree(){
 			myBuilder.updateNodeData(node,data);
 		});
 	});
-	/*
-	*/
-
 }
 
 window.addEventListener('nodeClick', function (e) {
@@ -210,18 +219,26 @@ window.addEventListener('nodeClick', function (e) {
 	}
 });
 
-
 function populateData() {
 	$.each(categories, function(key, value) {
      	$('#property')
           .append($('<option>', { value : key })
           .text(value));
+        $('#root-property')
+          .append($('<option>', { value : key })
+          .text(value));
 	});
 }
 
+function hideSubSections() {
+	$('subsection').css('display','none');
+}
+
 function expandSection(section) {
+	hideSubSections();
 	sectionName = section + "SubSection";
-	console.log(sectionName);
+	radio = section + "Radio";
+	$('#'+radio).prop("checked", true);
 	$('#'+sectionName).show();
 }
 
