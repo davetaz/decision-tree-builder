@@ -2,10 +2,10 @@ var variables = [
 	{ "Bathrooms": 2 },
 	{ "Bedrooms": 2 },
 	{ "Year built": 1900 },
-	{ "Elevation": 75 },
+	{ "Elevation": 36 },
 	{ "Square Footage": 3816 },
 	{ "Price": 2650000 },
-	{ "Price per sqft": 694 }
+	{ "Price per sqft": 1200 }
 ];
 
 var table;
