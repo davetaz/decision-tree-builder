@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Black box evaluator</title>
+
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/jquery.dataTables.min.css"/>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/query.dataTables.min.js"></script>
+
+	<script src="black-box.js"></script>
+</head>
+<body>
+<h1>Can you crack open the black box?</h1>
+<p>This 
+<section id="input-section">
+	<table id="varables-table">
+		<tr>
+			<th>Variable</th>
+			<th>Static value</th>
+			<th>Vary?</th>
+			<th>Minimum</th>
+			<th>Maximum</th>
+			<th>Interval</th>
+		</tr>
+	</table>
+	<input type='button' value='Run evaluator' onClick="runEvaluator();"></input>
+</section>
+<br/><br/>
+<section id="output-section">
+	<table id="output-table">
+		<thead>
+		</thead>
+		<tbody>	
+		</tbody>
+	</table>
+	<!--
+		PUT A DATATABLE IN HERE
+	-->
+</section>
+</body>
+</html>

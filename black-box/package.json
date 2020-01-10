@@ -1,0 +1,23 @@
+{
+	"name": "blackbox-ml-evaluator",
+	"version": "0.1.0",
+	"description": "A simple blackbox-ml-evaluator example",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/davetaz/decision-tree-builder.git"
+	},
+	"keywords": [
+		"d3",
+		"crossfilter"
+	],
+	"author": "davetaz@theodi",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/davetaz/decision-tree-builder/issues"
+	},
+	"homepage": "https://github.com/davetaz/decision-tree-builder/black-box/#readme",
+	"dependencies": {
+		"jquery": ">3.0.0",
+		"datatables": ">1.10.0"
+	}
+}
