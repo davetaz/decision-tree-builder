@@ -126,7 +126,7 @@ function getSingle(data) {
 
 function evaluateTree(testData) {
 	testData.forEach(function(val,idx) {
-		if (val["Bedrooms"] == 0.5) {
+		if (val["Bedrooms"] % 1 != 0) {
 			testData[idx].Classification = "New York";
 		} else {
 			if ((val["Year built"] > 1939) && (val["Year built"] < 1961)) {
