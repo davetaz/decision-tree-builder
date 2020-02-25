@@ -1,0 +1,39 @@
+body {
+	font-size: 0.8em;
+	-webkit-print-color-adjust:exact;
+}
+card {
+	width: 200px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 25px;
+	margin-right: 25px;
+	margin-bottom: 10px;
+}
+img {
+	margin: 10px;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto
+}
+.target {
+	float: left;
+	display: inline-block;
+}
+.number {
+	float: right;
+	position: relative;
+}
+table {
+	width: 100%;
+	font-size: 1em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+	font-size: 1.5em;
+}
+tr:nth-child(even) {background: #C9F}
+.value {
+	font-weight: bold;
+	text-align: right;
+}
