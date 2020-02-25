@@ -127,7 +127,7 @@ function getSingle(data) {
 function evaluateTree(testData) {
 	testData.forEach(function(val,idx) {
 		if (val["Bathrooms"] % 1 != 0) {
-			testData[idx].Classification = "New York";
+			testData[idx].Classification = "San Francisco";
 		} else {
 			if ((val["Year built"] > 1939) && (val["Year built"] < 1961)) {
 				testData[idx].Classification = "San Francisco";
