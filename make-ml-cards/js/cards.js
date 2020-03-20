@@ -14,7 +14,7 @@ $( document ).ready(function() {
 });
 
 function getPurpleCards() {
-	var count = 1;
+    var count = 1;
     d3.csv('data/houses_20.csv', function(data) {
     	renderCard(data,count);
     	count += 1;	
@@ -22,8 +22,8 @@ function getPurpleCards() {
 }
 
 function getBlueCards(group,card) {
-	var count = 1;
-	var index = 1;
+    var count = 1;
+    var index = 1;
     d3.csv('data/houses.csv', function(data) {
     	if (data.group == group) {
     		if (card == count) {
