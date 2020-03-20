@@ -3,18 +3,23 @@ body {
 	-webkit-print-color-adjust:exact;
 }
 card {
-	width: 200px;
+	width: 210px;
 	display: inline-block;
 	text-align: center;
-	margin-left: 25px;
-	margin-right: 25px;
+	padding-left: 25px;
+	padding-right: 25px;
 	margin-bottom: 10px;
+}
+h1 {
+	margin: 0px;
 }
 img {
 	margin: 10px;
 	width: 70%;
 	margin-left: auto;
-	margin-right: auto
+	margin-right: auto;
+	margin-top: 0px;
+    margin-bottom: 0px;
 }
 .target {
 	float: left;
@@ -31,9 +36,32 @@ table {
 }
 h1 {
 	font-size: 1.5em;
+
 }
-tr:nth-child(even) {background: #C9F}
+table.purple tr:nth-child(even) {background: #C9F6}
+table.blue tr:nth-child(even) {background: #0bf6}
+td {
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
 .value {
 	font-weight: bold;
 	text-align: right;
+}
+@media print {
+	card {
+		border-right: 1px dotted gray;
+		padding-bottom: 15px;
+		border-bottom: 1px dotted grey;
+		padding-top: 15px;
+	}
+	card:nth-child(4n+1) {
+		border-left: 1px dotted gray;
+	}
+	card:nth-child(-n+4), card:nth-child(9), card:nth-child(10), card:nth-child(11), card:nth-child(12), card:nth-child(17), card:nth-child(18), card:nth-child(19), card:nth-child(20) {
+		border-top: 1px dotted gray;
+	}
+	
 }

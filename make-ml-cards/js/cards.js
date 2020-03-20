@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	var color = getUrlParam('color','blue');
 	var group = getUrlParam('group',"1");
-	var card = getUrlParam('card',"1");
+	var card = getUrlParam('card',"0");
 
 	if (color == "purple") {
 		getPurpleCards();
@@ -16,7 +16,7 @@ $( document ).ready(function() {
 function getPurpleCards() {
     var count = 1;
     d3.csv('data/houses_20.csv', function(data) {
-    	renderCard(data,count);
+    	renderCard(data,count,'purple');
     	count += 1;	
     });
 }
@@ -26,8 +26,8 @@ function getBlueCards(group,card) {
     var index = 1;
     d3.csv('data/houses.csv', function(data) {
     	if (data.group == group) {
-    		if (card == count) {
-    			renderCard(data,index);
+    		if (card == count || card == "0") {
+    			renderCard(data,index,'blue');
     		}
     		count += 1;
     	}
@@ -35,9 +35,9 @@ function getBlueCards(group,card) {
     });
 }
 
-function renderCard(data,count) {
+function renderCard(data,count,color) {
 	console.log(data);
-	$('body').append('<card><h1 class="target">'+data.city+'</h1><h1 class="number">#'+count+'</h1><image src="img/house.png"></image><table><tr><td class="attribute">Bathrooms</td><td class="value">'+data.bath+'</td></tr><tr><td class="attribute">Bedrooms</td><td class="value">'+data.beds+'</td></tr><tr><td class="attribute">Year built</td><td class="value">'+data.year_built+'</td></tr><tr><td class="attribute">Elevation</td><td class="value">'+formatNumber(data.elevation)+'ft</td></tr><tr><td class="attribute">Square Footage</td><td class="value">'+formatNumber(data.sqft)+'</td></tr><tr><td class="attribute">Price</td><td class="value">$'+formatNumber(data.price)+'</td></tr><tr><td class="attribute">Price per sqft</td><td class="value">$'+formatNumber(data.price_per_sqft)+'</td></tr></table></card>');
+	$('body').append('<card><h1 class="target">'+data.city+'</h1><h1 class="number">#'+count+'</h1><image src="img/house.png"></image><table class="'+color+'"><tr><td class="attribute">Bathrooms</td><td class="value">'+data.bath+'</td></tr><tr><td class="attribute">Bedrooms</td><td class="value">'+data.beds+'</td></tr><tr><td class="attribute">Year built</td><td class="value">'+data.year_built+'</td></tr><tr><td class="attribute">Elevation</td><td class="value">'+formatNumber(data.elevation)+'ft</td></tr><tr><td class="attribute">Square Footage</td><td class="value">'+formatNumber(data.sqft)+'</td></tr><tr><td class="attribute">Price</td><td class="value">$'+formatNumber(data.price)+'</td></tr><tr><td class="attribute">Price per sqft</td><td class="value">$'+formatNumber(data.price_per_sqft)+'</td></tr></table></card>');
 }
 
 function formatNumber(num) {
