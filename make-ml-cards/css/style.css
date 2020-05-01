@@ -1,6 +1,24 @@
 body {
 	font-size: 0.8em;
 	-webkit-print-color-adjust:exact;
+	font-family: helvetica, sans;
+}
+body h2 {
+	padding-top: 1em;
+	font-size: 2em;
+}
+input {
+	font-size: 2em;
+	margin: 12px;
+	padding: 6px;
+}
+button {
+	font-size: 2em;
+	padding: 6px;
+}
+cards {
+	display: block;
+	margin-top: 2em;
 }
 card {
 	width: 210px;
@@ -9,6 +27,9 @@ card {
 	padding-left: 25px;
 	padding-right: 25px;
 	margin-bottom: 10px;
+}
+card button {
+	margin-top: 1em;
 }
 h1 {
 	margin: 0px;
@@ -40,6 +61,7 @@ h1 {
 }
 table.purple tr:nth-child(even) {background: #C9F6}
 table.blue tr:nth-child(even) {background: #0bf6}
+table.red tr:nth-child(even) {background: #c006}
 td {
 	padding-left: 6px;
 	padding-right: 6px;

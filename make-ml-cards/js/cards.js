@@ -1,17 +1,29 @@
-$( document ).ready(function() {
-	var color = getUrlParam('color','blue');
-	var group = getUrlParam('group',"1");
-	var card = getUrlParam('card',"0");
+function processInput() {
+    val = $('#number').val();
+    console.log(val);
+    if (redCount >= maxRedCount) {
+        alert("You have reached your limit of " + maxRedCount + " cards!");
+    }
+    if (redDone[val]) {
+        alert("You already have that card");
+    } else {
+        getRedCard(val);
+    }
+}
 
-	if (color == "purple") {
-		getPurpleCards();
-	} 
+function getRedCard(card) {
+    var index = 1;
+    d3.csv('data/red_cards.csv', function(data) {
+        if (index == card && redCount < maxRedCount) {
+            data.city = "?";
+            renderRedCard(data,index,'red');
+            redCount += 1;
+            redDone[index] = true;
+        }
+        index += 1;
+    });
+}
 
-	if (color == "blue") {
-		getBlueCards(group,card);
-	} 
-
-});
 
 function getPurpleCards() {
     var count = 1;
@@ -26,19 +38,27 @@ function getBlueCards(group,card) {
     var index = 1;
     d3.csv('data/houses.csv', function(data) {
     	if (data.group == group) {
-    		if (card == count || card == "0") {
-    			renderCard(data,index,'blue');
-    		}
+    		renderCard(data,index,'blue');
     		count += 1;
     	}
     	index += 1;
     });
 }
 
+function removeCard(id){
+    $('#red-'+id).remove();
+    redCount = redCount - 1;
+    redDone[id] = false;
+}
+
 function renderCard(data,count,color) {
-	console.log(data);
 	$('body').append('<card><h1 class="target">'+data.city+'</h1><h1 class="number">#'+count+'</h1><image src="img/house.png"></image><table class="'+color+'"><tr><td class="attribute">Bathrooms</td><td class="value">'+data.bath+'</td></tr><tr><td class="attribute">Bedrooms</td><td class="value">'+data.beds+'</td></tr><tr><td class="attribute">Year built</td><td class="value">'+data.year_built+'</td></tr><tr><td class="attribute">Elevation</td><td class="value">'+formatNumber(data.elevation)+'ft</td></tr><tr><td class="attribute">Square Footage</td><td class="value">'+formatNumber(data.sqft)+'</td></tr><tr><td class="attribute">Price</td><td class="value">$'+formatNumber(data.price)+'</td></tr><tr><td class="attribute">Price per sqft</td><td class="value">$'+formatNumber(data.price_per_sqft)+'</td></tr></table></card>');
 }
+
+function renderRedCard(data,count,color) {
+    $('cards').append('<card id="red-'+count+'"><h1 class="target">'+data.city+'</h1><h1 class="number">#'+count+'</h1><image src="img/house.png"></image><table class="'+color+'"><tr><td class="attribute">Bathrooms</td><td class="value">'+data.bath+'</td></tr><tr><td class="attribute">Bedrooms</td><td class="value">'+data.beds+'</td></tr><tr><td class="attribute">Year built</td><td class="value">'+data.year_built+'</td></tr><tr><td class="attribute">Elevation</td><td class="value">'+formatNumber(data.elevation)+'ft</td></tr><tr><td class="attribute">Square Footage</td><td class="value">'+formatNumber(data.sqft)+'</td></tr><tr><td class="attribute">Price</td><td class="value">$'+formatNumber(data.price)+'</td></tr><tr><td class="attribute">Price per sqft</td><td class="value">$'+formatNumber(data.price_per_sqft)+'</td></tr></table><div><button onClick="removeCard(\''+count+'\');">Remove card</button></card>');
+}
+
 
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')

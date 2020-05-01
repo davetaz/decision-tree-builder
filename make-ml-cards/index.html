@@ -7,4 +7,20 @@
 </head>
 <body>
 </body>
+<script type="text/javascript">
+$( document ).ready(function() {
+	var color = getUrlParam('color','blue');
+	var group = getUrlParam('group',"1");
+	var card = getUrlParam('card',"0");
+
+	if (color == "purple") {
+		getPurpleCards();
+	} 
+
+	if (color == "blue") {
+		getBlueCards(group,card);
+	} 
+
+});
+</script>
 </html>
