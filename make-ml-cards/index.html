@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<cards></cards>
 </body>
 <script type="text/javascript">
 $( document ).ready(function() {
@@ -19,6 +20,10 @@ $( document ).ready(function() {
 
 	if (color == "blue") {
 		getBlueCards(group,card);
+	} 
+
+	if (color == "red") {
+		getRedCards(getRandomNumbers(20,1,242));
 	} 
 
 });

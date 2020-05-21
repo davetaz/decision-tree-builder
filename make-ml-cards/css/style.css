@@ -79,10 +79,10 @@ td {
 		border-bottom: 1px dotted grey;
 		padding-top: 15px;
 	}
-	card:nth-child(4n+1) {
+	card:nth-child(-n+4), card:nth-child(7), card:nth-child(11), card:nth-child(15), card:nth-child(19)  {
 		border-left: 1px dotted gray;
 	}
-	card:nth-child(-n+4), card:nth-child(9), card:nth-child(10), card:nth-child(11), card:nth-child(12), card:nth-child(17), card:nth-child(18), card:nth-child(19), card:nth-child(20) {
+	card:nth-child(-n+6), card:nth-child(11), card:nth-child(12), card:nth-child(13), card:nth-child(14), card:nth-child(19), card:nth-child(20), card:nth-child(21), card:nth-child(22) {
 		border-top: 1px dotted gray;
 	}
 	
